@@ -1,0 +1,6 @@
+https://st.suckless.org/patches/scrollback/
+
+scrollback
+Description
+
+Scroll back through terminal output using Shift+{PageUp, PageDown}.
