@@ -163,9 +163,9 @@ Paste from the clipboard selection.
 
 keyboard_select
 
-
 scrollback
 
+clipboard
 
 .SH
 patch: keyboard_select
@@ -218,6 +218,21 @@ https://st.suckless.org/patches/scrollback/
 
 Scroll back through terminal output using Shift+{PageUp, PageDown}.
 
+.SH patch: clipboard
+
+Free Desktop mandates the user to remember which of two clipboards you are
+keeping selections in. If you switch between a terminal and browser, you might
+this UX jarring. This patch modifies st to work from one CLIPBOARD, the same as
+your browser.  Description
+
+st by default only sets PRIMARY on selection since March 2015 according to the
+Freedesktop standard.
+
+This patch makes st set CLIPBOARD on selection. Furthermore from
+st-clipboard-0.8.2.diff middle click pastes from CLIPBOARD.
+
+You may want to replace selpaste with clippaste in your config.h to complete
+the affect.
 
 
 
