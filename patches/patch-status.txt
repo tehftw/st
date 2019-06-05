@@ -1,0 +1,4 @@
+st-clipboard-0.8.2.diff       	 	 
+st-externalpipe-0.8.2.diff    	 	 
+st-keyboard_select-0.8.2.diff 	 	 
+st-scrollback-0.8.2.diff      	 	 
