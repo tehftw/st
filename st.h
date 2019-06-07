@@ -123,3 +123,6 @@ extern char *termname;
 extern unsigned int tabspaces;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
+
+
+void delete_history(const Arg *);

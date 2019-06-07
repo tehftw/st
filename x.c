@@ -43,6 +43,17 @@ typedef struct {
 	signed char appcursor; /* application cursor */
 } Key;
 
+typedef struct {
+	const char * schemename ;
+	const char ** colorname ;
+	size_t len ;
+	unsigned int defaultfg ;
+	unsigned int defaultbg ;
+	unsigned int defaultcs ;
+	unsigned int defaultrcs ;
+} Colorscheme;
+
+
 /* X modifiers */
 #define XK_ANY_MOD    UINT_MAX
 #define XK_NO_MOD     0
@@ -725,8 +736,9 @@ xloadcolor(int i, const char *name, Color *ncolor)
 			}
 			return XftColorAllocValue(xw.dpy, xw.vis,
 			                          xw.cmap, &color, ncolor);
-		} else
+		} else {
 			name = colorname[i];
+		}
 	}
 
 	return XftColorAllocName(xw.dpy, xw.vis, xw.cmap, name, ncolor);
@@ -743,7 +755,7 @@ xloadcols(void)
 		for (cp = dc.col; cp < &dc.col[dc.collen]; ++cp)
 			XftColorFree(xw.dpy, xw.vis, xw.cmap, cp);
 	} else {
-		dc.collen = MAX(LEN(colorname), 256);
+		dc.collen = MAX(length_colorname, 256);
 		dc.col = xmalloc(dc.collen * sizeof(Color));
 	}
 
@@ -1933,6 +1945,44 @@ void keyboard_select(const Arg *dummy) {
 }
 
 
+void set_colorscheme(size_t i)
+{
+	if( i > LEN(colorschemes) ) {
+		i = 0;
+	}
+
+	index_colorscheme = i;
+	length_colorname = colorschemes[i].len;
+	colorname = colorschemes[i].colorname;
+	defaultfg = colorschemes[i].defaultfg;
+	defaultbg = colorschemes[i].defaultbg;
+	defaultcs = colorschemes[i].defaultcs;
+	defaultrcs = colorschemes[i].defaultrcs;
+}
+
+
+void set_colorscheme_by_name(const char * name)
+{
+	for( unsigned int i = 0; i < LEN(colorschemes); ++i ) {
+		if( strcmp( name , colorschemes[i].schemename ) == 0 ) {
+			set_colorscheme( i );
+			return;
+		}
+	}
+	fprintf( stderr , "failed to match color '%s'" , name );
+}
+
+
+void dump_colorschemes()
+{
+	for( size_t i = 0; i < LEN(colorschemes); ++i ) {
+		printf("0x%zx '%s'\n" , i , colorschemes[i].schemename);
+	}
+}
+
+
+
+
 int
 main(int argc, char *argv[])
 {
@@ -1979,6 +2029,21 @@ main(int argc, char *argv[])
 		break;
 	case 'v':
 		die("%s " VERSION "\n", argv0);
+		break;
+	case 's':
+		set_colorscheme_by_name(EARGF(usage()));
+		break;
+	case 'S':
+		dump_colorschemes();
+		break;
+	case '1':
+		set_colorscheme(1);
+		break;
+	case '2':
+		set_colorscheme(2);
+		break;
+	case '3':
+		set_colorscheme(3);
 		break;
 	default:
 		usage();

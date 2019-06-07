@@ -83,7 +83,9 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
+
+
+static const char *color_0[] = {
 	/* 8 normal colors */
 	"#101010",  /* 0x0: black   #000000 */
 	"#c01010",  /* 0x1: red     #cd0000 */
@@ -107,15 +109,76 @@ static const char *colorname[] = {
 	/* more colors can be added after 255 to use with DefaultXX */
 };
 
+static const char *color_1[] = {
+	/* 8 normal colors */
+	"#202020",  /* 0x0: black   #000000 */
+	"#c01010",  /* 0x1: red     #cd0000 */
+	"#10c010",  /* 0x2: green   #00cd00 */
+	"#c0c020",  /* 0x3: yellow  #cdcd00 */
+	"#2020c0",  /* 0x4: blue    #0000ee */
+	"#c010c0",  /* 0x5: magenta #cd00cd */
+	"#10c0c0",  /* 0x6: cyan    #00ffff */
+	"#f0f0f0",  /* 0x7: white   #e5e5e5 */
+
+	/* 8 bright colors */
+	"#606060",  /* 0x8: brblack   #808080 */
+	"#f04040",  /* 0x9: brred     #ff00ff */
+	"#40f020",  /* 0xa: brgreen   #00ff00 */
+	"#f0f040",  /* 0xb: bryellow  #ffff00 */
+	"#4040f0",  /* 0xc: brblue    #5c5cff */
+	"#f040f0",  /* 0xd: brmagenta #ff00ff */
+	"#40f0f0",  /* 0xe: brcyan    #00ffff */
+	"#a0a0a0",  /* 0xf: brwhite   #ffffff */
+};
+
+
+static const char *color_2[] = {
+	/* 8 normal colors */
+	"#000000",  /* 0x0: black   #000000 */
+	"#ff0000",  /* 0x1: red     #cd0000 */
+	"#00ff00",  /* 0x2: green   #00cd00 */
+	"#ffff00",  /* 0x3: yellow  #cdcd00 */
+	"#0000ff",  /* 0x4: blue    #0000ee */
+	"#ff00ff",  /* 0x5: magenta #cd00cd */
+	"#00ffff",  /* 0x6: cyan    #00ffff */
+	"#ffffff",  /* 0x7: white   #e5e5e5 */
+
+	/* 8 bright colors */
+	"#404040",  /* 0x8: brblack   #808080 */
+	"#ff4040",  /* 0x9: brred     #ff00ff */
+	"#40ff40",  /* 0xa: brgreen   #00ff00 */
+	"#ffff40",  /* 0xb: bryellow  #ffff00 */
+	"#4040ff",  /* 0xc: brblue    #5c5cff */
+	"#ff40ff",  /* 0xd: brmagenta #ff00ff */
+	"#40ffff",  /* 0xe: brcyan    #00ffff */
+	"#c0c0c0",  /* 0xf: brwhite   #ffffff */
+};
+
+
+static const Colorscheme colorschemes[] = {
+	{ "dark"      , color_0 , LEN(color_0) , 7 , 0 , 6 , 5 } ,
+	{ "light"     , color_1 , LEN(color_1) , 0 , 7 , 6 , 5 } ,
+	{ "strong"    , color_2 , LEN(color_2) , 7 , 0 , 6 , 5 } ,
+	{ "strongrev" , color_2 , LEN(color_2) , 0 , 7 , 6 , 5 } ,
+};
+
+const char * * colorname = color_0;
+
+unsigned int length_colorname = LEN(color_0); // LEN(color_default)
+
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
+unsigned int index_colorscheme = 0;
 unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
-static unsigned int defaultcs = 5;
-static unsigned int defaultrcs = 6;
+static unsigned int defaultcs = 6;
+static unsigned int defaultrcs = 5;
+
+unsigned int altfg = 0;
+unsigned int altbg = 7;
 
 /*
  * Default shape of cursor
@@ -184,6 +247,8 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = +1} },
 
 	{ TERMMOD,              XK_Escape,      keyboard_select,{ 0 } },
+
+	{ TERMMOD,              XK_End ,           delete_history , { 0 } },
 };
 
 /*

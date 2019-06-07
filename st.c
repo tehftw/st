@@ -22,6 +22,9 @@
 #include "st.h"
 #include "win.h"
 
+
+int wcwidth(wchar_t c); // to shut up some stupid warning about implicit declaration
+
 #if   defined(__linux)
  #include <pty.h>
 #elif defined(__OpenBSD__) || defined(__NetBSD__) || defined(__APPLE__)
@@ -37,7 +40,7 @@
 #define ESC_ARG_SIZ   16
 #define STR_BUF_SIZ   ESC_BUF_SIZ
 #define STR_ARG_SIZ   ESC_ARG_SIZ
-#define HISTSIZE      2000
+#define HISTSIZE      0x2000
 
 /* macros */
 #define IS_SET(flag)		((term.mode & (flag)) != 0)
@@ -2661,6 +2664,13 @@ redraw(void)
 	tfulldirt();
 	draw();
 }
+
+
+void delete_history(const Arg * dummy)
+{
+	term.histi = 0;
+}
+
 
 void set_notifmode(int type, KeySym ksym) {
     static char *lib[] = { " MOVE ", " SEL  "};

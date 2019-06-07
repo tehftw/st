@@ -161,11 +161,32 @@ Copy the selected text to the clipboard selection.
 Paste from the clipboard selection.
 .SH ADDED PATCHES
 
+teh: colorschemes
+
 keyboard_select
 
 scrollback
 
 clipboard
+
+.SH
+teh: colorscheme
+
+allows use of multiple colorschemes, chosen as commandline arguments. by
+default picks colorscheme 0
+
+arguments:
+
+
+
+.B -s [name]
+pick colorscheme by name. upon failure to match, uses default(0)
+
+.B -S
+dump names of available colorschemes
+
+.B -1 or -2 or -3
+pick coloscheme by number: 1, 2, or 3
 
 .SH
 patch: keyboard_select
