@@ -1945,10 +1945,11 @@ void keyboard_select(const Arg *dummy) {
 }
 
 
-void set_colorscheme(size_t i)
+void set_colorscheme(unsigned int i)
 {
-	if( i > LEN(colorschemes) ) {
-		i = 0;
+	if( i >= LEN(colorschemes) ) {
+		fprintf( stderr , "failed to choose colorscheme 0x%x, out of 0x%zx\n" , i , LEN(colorschemes) );
+		return;
 	}
 
 	index_colorscheme = i;
@@ -1963,20 +1964,32 @@ void set_colorscheme(size_t i)
 
 void set_colorscheme_by_name(const char * name)
 {
+	/* try parsing as number */
+	char * endptr;
+	errno = 0;
+	long int j  = strtol(name , &endptr , 0);
+	if( !errno && (*endptr == '\0')) {
+		set_colorscheme(j);
+		return;
+	}
+
+	/* match by string comparison */
 	for( unsigned int i = 0; i < LEN(colorschemes); ++i ) {
 		if( strcmp( name , colorschemes[i].schemename ) == 0 ) {
 			set_colorscheme( i );
 			return;
 		}
 	}
-	fprintf( stderr , "failed to match color '%s'" , name );
+
+	
+	fprintf( stderr , "failed to match colorscheme '%s'" , name );
 }
 
 
 void dump_colorschemes()
 {
 	for( size_t i = 0; i < LEN(colorschemes); ++i ) {
-		printf("0x%zx '%s'\n" , i , colorschemes[i].schemename);
+		printf("0x%zx\t%s\n" , i , colorschemes[i].schemename);
 	}
 }
 
@@ -2035,15 +2048,7 @@ main(int argc, char *argv[])
 		break;
 	case 'S':
 		dump_colorschemes();
-		break;
-	case '1':
-		set_colorscheme(1);
-		break;
-	case '2':
-		set_colorscheme(2);
-		break;
-	case '3':
-		set_colorscheme(3);
+		goto end;
 		break;
 	default:
 		usage();
@@ -2066,5 +2071,6 @@ run:
 	selinit();
 	run();
 
+end:
 	return 0;
 }

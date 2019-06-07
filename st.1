@@ -123,6 +123,17 @@ on the command line, as in xterm / rxvt.
 This option is only intended for compatibility,
 and all the remaining arguments are used as a command
 even without it.
+
+
+.TP
+.BI \-s " colorscheme "
+pick colorscheme. see section: teh_colorscheme
+
+.TP
+.BI -S
+dump names of available colorschemes and exit.
+
+
 .SH SHORTCUTS
 .TP
 .B Break
@@ -159,37 +170,27 @@ Copy the selected text to the clipboard selection.
 .TP
 .B Ctrl-Shift-v
 Paste from the clipboard selection.
-.SH ADDED PATCHES
+.SH PATCHES
 
-teh: colorschemes
+.BI
+teh_colorscheme
 
-keyboard_select
+Allows use of multiple colorschemes, chosen via commandline arguments.
+.BI \-s " colorscheme "
+tries to match a colorscheme defined in config.h, according to rules:
 
-scrollback
+1. as number - index in colorschemes array
 
-clipboard
+2. as string - name of colorscheme
 
-.SH
-teh: colorscheme
+3. upon failure to match an available scheme, defaults to 0
 
-allows use of multiple colorschemes, chosen as commandline arguments. by
-default picks colorscheme 0
-
-arguments:
+You can also use
+.BI \-S
+to dump names of available colorschemes and exit.
 
 
-
-.B -s [name]
-pick colorscheme by name. upon failure to match, uses default(0)
-
-.B -S
-dump names of available colorschemes
-
-.B -1 or -2 or -3
-pick coloscheme by number: 1, 2, or 3
-
-.SH
-patch: keyboard_select
+.BI keyboard_select
 
 https://st.suckless.org/patches/keyboard_select/
 
@@ -233,13 +234,13 @@ Shortcuts for input mode :
 
  Return:       Return to the previous mode
 
-.SH patch: scrollback
+.BI scrollback
 
 https://st.suckless.org/patches/scrollback/
 
 Scroll back through terminal output using Shift+{PageUp, PageDown}.
 
-.SH patch: clipboard
+.BI clipboard
 
 Free Desktop mandates the user to remember which of two clipboards you are
 keeping selections in. If you switch between a terminal and browser, you might
