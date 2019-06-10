@@ -1057,6 +1057,9 @@ tswapscreen(void)
 	term.mode ^= MODE_ALTSCREEN;
 	tfulldirt();
 }
+
+
+
 void
 kscrolldown(const Arg* a)
 {

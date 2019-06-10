@@ -1,0 +1,5 @@
+.BI scrollback
+
+https://st.suckless.org/patches/scrollback/
+
+Scroll back through terminal output using Shift+{PageUp, PageDown}.

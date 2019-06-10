@@ -1,4 +1,5 @@
 *~
 
-st
-*.o
+out/
+out/*
+*.tar.gz

@@ -1,0 +1,17 @@
+
+.BI colorscheme
+
+Allows use of multiple colorschemes, chosen via commandline arguments.
+.BI \-s " colorscheme "
+tries to match a colorscheme defined in config.h, according to rules:
+
+1. as number - index in colorschemes array
+
+2. as string - name of colorscheme
+
+3. upon failure to match an available scheme, defaults to 0
+
+You can also use
+.BI \-S
+to dump names of available colorschemes and exit.
+
