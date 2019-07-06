@@ -87,7 +87,7 @@ unsigned int tabspaces = 8;
 
 static const char *color_0[] = {
 	/* 8 normal colors */
-	"#101010",  /* 0x0: black   #000000 */
+	"#080808",  /* 0x0: black   #000000 */
 	"#c01010",  /* 0x1: red     #cd0000 */
 	"#10c010",  /* 0x2: green   #00cd00 */
 	"#c0c010",  /* 0x3: yellow  #cdcd00 */
@@ -155,11 +155,58 @@ static const char *color_2[] = {
 };
 
 
+static const char *color_cmd[] = {
+	/* 8 normal colors */
+	"#000000",  /* 0x0: black   #000000 */
+	"#800000",  /* 0x1: red     #800000 */
+	"#008000",  /* 0x2: green   #008000 */
+	"#808000",  /* 0x3: yellow  #808000 */
+	"#000080",  /* 0x4: blue    #000080 */
+	"#800080",  /* 0x5: magenta #800080 */
+	"#008080",  /* 0x6: cyan    #008080 */
+	"#c0c0c0",  /* 0x7: white   #c0c0c0 */
+
+	/* 8 bright colors */
+	"#808080",  /* 0x8: brblack   #808080 */
+	"#ff00ff",  /* 0x9: brred     #ff00ff */
+	"#00ff00",  /* 0xa: brgreen   #00ff00 */
+	"#ffff00",  /* 0xb: bryellow  #ffff00 */
+	"#0000ff",  /* 0xc: brblue    #0000ff */
+	"#ff00ff",  /* 0xd: brmagenta #ff00ff */
+	"#00ffff",  /* 0xe: brcyan    #00ffff */
+	"#ffffff",  /* 0xf: brwhite   #ffffff */
+};
+
+
+static const char *color_xorg[] = {
+	/* 8 normal colors */
+	"black",    /* 0x0: black   #000000 */
+	"red",      /* 0x1: red     #800000 */
+	"green",    /* 0x2: green   #008000 */
+	"yellow",   /* 0x3: yellow  #808000 */
+	"blue",     /* 0x4: blue    #000080 */
+	"magenta",  /* 0x5: magenta #800080 */
+	"cyan",     /* 0x6: cyan    #008080 */
+	"white",    /* 0x8: white   #c0c0c0 */
+
+//	/* 8 bright colors */
+//	"brblack",    /* 0x8: brblack   #808080 */
+//	"brred",      /* 0x9: brred     #ff00ff */
+//	"brgreen",    /* 0xa: brgreen   #00ff00 */
+//	"bryellow",   /* 0xb: bryellow  #ffff00 */
+//	"brblue",     /* 0xc: brblue    #0000ff */
+//	"brmagenta",  /* 0xd: brmagenta #ff00ff */
+//	"brcyan",     /* 0xe: brcyan    #00ffff */
+//	"brwhite",    /* 0xf: brwhite   #ffffff */
+};
+
 static const Colorscheme colorschemes[] = {
-	{ "dark"      , color_0 , LEN(color_0) , 7 , 0 , 6 , 5 } ,
-	{ "light"     , color_1 , LEN(color_1) , 0 , 7 , 6 , 5 } ,
-	{ "strong"    , color_2 , LEN(color_2) , 7 , 0 , 6 , 5 } ,
-	{ "strongrev" , color_2 , LEN(color_2) , 0 , 7 , 6 , 5 } ,
+	{ "dark"      , color_0   , LEN(color_0)     , 7 , 0 , 6 , 5 } ,
+	{ "light"     , color_1   , LEN(color_1)     , 0 , 7 , 6 , 5 } ,
+	{ "strong"    , color_2   , LEN(color_2)     , 7 , 0 , 6 , 5 } ,
+	{ "strongrev" , color_2   , LEN(color_2)     , 0 , 7 , 6 , 5 } ,
+	{ "cmd"       , color_cmd , LEN(color_cmd)   , 7 , 0 , 6 , 5  } ,
+	{ "xorg"      , color_xorg, LEN(color_xorg)  , 7 , 0 , 6 , 5  } ,
 };
 
 const char * * colorname = color_0;
@@ -174,8 +221,8 @@ unsigned int length_colorname = LEN(color_0); // LEN(color_default)
 unsigned int index_colorscheme = 0;
 unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
-static unsigned int defaultcs = 6;
-static unsigned int defaultrcs = 5;
+static unsigned int defaultcs = 5;
+static unsigned int defaultrcs = 6;
 
 unsigned int altfg = 0;
 unsigned int altbg = 7;
@@ -229,12 +276,12 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+	{ TERMMOD,              XK_P,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
-	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 
 	{ ControlMask,          XK_equal,       zoom,           {.f = +4} },
 	{ ControlMask,          XK_minus,       zoom,           {.f = -4} },
@@ -247,8 +294,6 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = +1} },
 
 	{ TERMMOD,              XK_Escape,      keyboard_select,{ 0 } },
-
-	{ TERMMOD,              XK_End ,           delete_history , { 0 } },
 };
 
 /*

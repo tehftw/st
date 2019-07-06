@@ -2669,10 +2669,6 @@ redraw(void)
 }
 
 
-void delete_history(const Arg * dummy)
-{
-	term.histi = 0;
-}
 
 
 void set_notifmode(int type, KeySym ksym) {
