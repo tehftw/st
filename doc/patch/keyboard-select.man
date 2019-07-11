@@ -31,7 +31,7 @@ Shortcuts for move and select modes :
  Home, End:     move cursor to the top/bottom left corner of the screen
  /, ?:          activate input mode and search up/down
  n, N:          repeat last search, up/down
- s:             toggle move/selection mode
+ v, s:          toggle move/selection mode
  t:             toggle regular/rectangular selection type
  Return:        quit keyboard_select, keeping the highlight of the selection
  Escape:        quit keyboard_select

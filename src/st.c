@@ -2734,7 +2734,7 @@ void search(int selectsearch_mode, Rune *target, int ptarget, int incr, int type
         }
         if ( r != NULL )    break;
     }
-        
+
     if ( i != bound ) {
         term.c.y = i / term.col, term.c.x = i % term.col;
         select_or_drawcursor(selectsearch_mode, type);
@@ -2787,6 +2787,7 @@ int trt_kbdselect(KeySym ksym, char *buf, int len) {
         set_notifmode(0, ksym);
         return MODE_KBDSELECT;
     case XK_s :
+    case XK_v :
         if ( selectsearch_mode & 1 )
             selclear();
         else
