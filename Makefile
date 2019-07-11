@@ -16,7 +16,7 @@ mansrc=$(wildcard doc/*.man)
 mansrc_patch=$(wildcard doc/patch/*.man)
 
 
-all: options out binary manpage $(binary) $(manpage)
+all: options out binary $(manpage) $(binary)
 
 
 options:
@@ -40,10 +40,10 @@ binary: $(binary)
 $(binary): out $(SRC) $(src_headers)
 	$(CC) -o $@ $(SRC) $(STDFLAGS) $(STLDFLAGS) $(STCFLAGS)
 
-manpage: $(manpage)
+man: $(manpage)
 
-$(manpage): out $(mansrc)
-	cat doc/st.man $(doc_patch) doc/footer.man > out/st.1
+$(manpage): out $(mansrc) $(mansrc_patch)
+	cat doc/st.man $(mansrc_patch) doc/footer.man > out/st.1
 
 clean:
 	rm -rf out/ st-$(VERSION).tar.gz

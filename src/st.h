@@ -125,4 +125,6 @@ extern unsigned int defaultfg;
 extern unsigned int defaultbg;
 
 
-void delete_history(const Arg *);
+
+void
+set_colorscheme(const Arg * arg);

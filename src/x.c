@@ -1945,7 +1945,7 @@ void keyboard_select(const Arg *dummy) {
 }
 
 
-void set_colorscheme(unsigned int i)
+void set_colorscheme_by_index(unsigned int i)
 {
 	if( i >= LEN(colorschemes) ) {
 		fprintf( stderr , "failed to choose colorscheme 0x%x, out of 0x%zx\n" , i , LEN(colorschemes) );
@@ -1969,19 +1969,19 @@ void set_colorscheme_by_name(const char * name)
 	errno = 0;
 	long int j  = strtol(name , &endptr , 0);
 	if( !errno && (*endptr == '\0')) {
-		set_colorscheme(j);
+		set_colorscheme_by_index(j);
 		return;
 	}
 
 	/* match by string comparison */
 	for( unsigned int i = 0; i < LEN(colorschemes); ++i ) {
 		if( strcmp( name , colorschemes[i].schemename ) == 0 ) {
-			set_colorscheme( i );
+			set_colorscheme_by_index( i );
 			return;
-		}
+		}	
 	}
 
-	
+
 	fprintf( stderr , "failed to match colorscheme '%s'" , name );
 }
 
@@ -1993,6 +1993,17 @@ void dump_colorschemes()
 	}
 }
 
+
+
+void
+set_colorscheme(const Arg * arg)
+{
+	if ( arg->i < LEN(colorschemes) )   {
+		set_colorscheme_by_index(arg->i);
+		xloadcols();
+		cresize(win.w, win.h);
+	}
+}
 
 
 

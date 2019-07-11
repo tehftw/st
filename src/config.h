@@ -85,13 +85,19 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 
 
-static const char *color_0[] = {
+unsigned int defaultfg = 7;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 5;
+static unsigned int defaultrcs = 6;
+
+
+static const char *color_teh_dark[] = { /* teh-dark */
 	/* 8 normal colors */
 	"#080808",  /* 0x0: black   #000000 */
 	"#c01010",  /* 0x1: red     #cd0000 */
 	"#10c010",  /* 0x2: green   #00cd00 */
 	"#c0c010",  /* 0x3: yellow  #cdcd00 */
-	"#2020c0",  /* 0x4: blue    #0000ee */
+	"#1010c0",  /* 0x4: blue    #0000ee */
 	"#c010c0",  /* 0x5: magenta #cd00cd */
 	"#10c0c0",  /* 0x6: cyan    #00ffff */
 	"#a8a8a8",  /* 0x7: white   #e5e5e5 */
@@ -105,34 +111,56 @@ static const char *color_0[] = {
 	"#f040f0",  /* 0xd: brmagenta #ff00ff */
 	"#40f0f0",  /* 0xe: brcyan    #00ffff */
 	"#ffffff",  /* 0xf: brwhite   #ffffff */
-
-	/* more colors can be added after 255 to use with DefaultXX */
 };
 
-static const char *color_1[] = {
+
+static const char *color_teh_reversed[] = { /* teh-dark */
 	/* 8 normal colors */
-	"#202020",  /* 0x0: black   #000000 */
-	"#c01010",  /* 0x1: red     #cd0000 */
-	"#10c010",  /* 0x2: green   #00cd00 */
-	"#c0c020",  /* 0x3: yellow  #cdcd00 */
-	"#2020c0",  /* 0x4: blue    #0000ee */
+	"#a8a8a8",  /* 0x7: white   #e5e5e5 */
+	"#1010c0",  /* 0x4: blue    #0000ee */
 	"#c010c0",  /* 0x5: magenta #cd00cd */
 	"#10c0c0",  /* 0x6: cyan    #00ffff */
-	"#f0f0f0",  /* 0x7: white   #e5e5e5 */
+	"#c01010",  /* 0x1: red     #cd0000 */
+	"#10c010",  /* 0x2: green   #00cd00 */
+	"#c0c010",  /* 0x3: yellow  #cdcd00 */
+	"#080808",  /* 0x0: black   #000000 */
 
 	/* 8 bright colors */
+	"#ffffff",  /* 0xf: brwhite   #ffffff */
+	"#4040f0",  /* 0xc: brblue    #5c5cff */
+	"#f040f0",  /* 0xd: brmagenta #ff00ff */
+	"#40f0f0",  /* 0xe: brcyan    #00ffff */
+	"#f04040",  /* 0x9: brred     #ff00ff */
+	"#40f040",  /* 0xa: brgreen   #00ff00 */
+	"#f0f040",  /* 0xb: bryellow  #ffff00 */
 	"#606060",  /* 0x8: brblack   #808080 */
+};
+
+
+static const char *color_teh_bright[] = { /* teh-bright */
+	/* 8 normal colors */
+	"#404040",  /* 0x0: black   #000000 */
+	"#802020",  /* 0x1: red     #cd0000 */
+	"#208020",  /* 0x2: green   #00cd00 */
+	"#808020",  /* 0x3: yellow  #cdcd00 */
+	"#202080",  /* 0x4: blue    #0000ee */
+	"#802080",  /* 0x5: magenta #cd00cd */
+	"#2080c0",  /* 0x6: cyan    #00ffff */
+	"#b0b0b0",  /* 0x7: white   #e5e5e5 */
+
+	/* 8 bright colors */
+	"#202020",  /* 0x8: brblack   #808080 */
 	"#f04040",  /* 0x9: brred     #ff00ff */
 	"#40f020",  /* 0xa: brgreen   #00ff00 */
 	"#f0f040",  /* 0xb: bryellow  #ffff00 */
 	"#4040f0",  /* 0xc: brblue    #5c5cff */
 	"#f040f0",  /* 0xd: brmagenta #ff00ff */
 	"#40f0f0",  /* 0xe: brcyan    #00ffff */
-	"#a0a0a0",  /* 0xf: brwhite   #ffffff */
+	"#e0e0e0",  /* 0xf: brwhite   #ffffff */
 };
 
 
-static const char *color_2[] = {
+static const char *color_teh_strong[] = { /* strong */
 	/* 8 normal colors */
 	"#000000",  /* 0x0: black   #000000 */
 	"#ff0000",  /* 0x1: red     #cd0000 */
@@ -178,54 +206,45 @@ static const char *color_cmd[] = {
 };
 
 
-static const char *color_xorg[] = {
-	/* 8 normal colors */
-	"black",    /* 0x0: black   #000000 */
-	"red",      /* 0x1: red     #800000 */
-	"green",    /* 0x2: green   #008000 */
-	"yellow",   /* 0x3: yellow  #808000 */
-	"blue",     /* 0x4: blue    #000080 */
-	"magenta",  /* 0x5: magenta #800080 */
-	"cyan",     /* 0x6: cyan    #008080 */
-	"white",    /* 0x8: white   #c0c0c0 */
-
-//	/* 8 bright colors */
-//	"brblack",    /* 0x8: brblack   #808080 */
-//	"brred",      /* 0x9: brred     #ff00ff */
-//	"brgreen",    /* 0xa: brgreen   #00ff00 */
-//	"bryellow",   /* 0xb: bryellow  #ffff00 */
-//	"brblue",     /* 0xc: brblue    #0000ff */
-//	"brmagenta",  /* 0xd: brmagenta #ff00ff */
-//	"brcyan",     /* 0xe: brcyan    #00ffff */
-//	"brwhite",    /* 0xf: brwhite   #ffffff */
-};
-
 static const Colorscheme colorschemes[] = {
-	{ "dark"      , color_0   , LEN(color_0)     , 7 , 0 , 6 , 5 } ,
-	{ "light"     , color_1   , LEN(color_1)     , 0 , 7 , 6 , 5 } ,
-	{ "strong"    , color_2   , LEN(color_2)     , 7 , 0 , 6 , 5 } ,
-	{ "strongrev" , color_2   , LEN(color_2)     , 0 , 7 , 6 , 5 } ,
-	{ "cmd"       , color_cmd , LEN(color_cmd)   , 7 , 0 , 6 , 5  } ,
-	{ "xorg"      , color_xorg, LEN(color_xorg)  , 7 , 0 , 6 , 5  } ,
+// quite likely to explode if you define anything other than 16 colors
+	{ "dark"       , color_teh_dark , LEN(color_teh_dark)
+		, 7 , 0 , 6 , 5 } ,
+	{ "light"      , color_teh_bright , LEN(color_teh_bright)
+		, 7 , 0 , 6 , 5 } ,
+	{ "strong"     , color_teh_strong , LEN(color_teh_strong)
+		, 7 , 0 , 6 , 5 } ,
+	{ "cmd"        , color_cmd , LEN(color_cmd)
+		, 7 , 0 , 6 , 5 } ,
+	{ "dark-rev"   , color_teh_dark , LEN(color_teh_dark)
+		, 0 , 7 , 6 , 5 } ,
+	{ "light-rev"  , color_teh_bright , LEN(color_teh_bright)
+		, 0 , 7 , 6 , 5 } ,
+	{ "strong-rev" , color_teh_strong , LEN(color_teh_strong)
+		, 0 , 7 , 6 , 5 } ,
+	{ "cmd-rev"    , color_cmd , LEN(color_cmd)
+		, 0 , 7 , 6 , 5 } ,
+	{ "dark-reversed"       , color_teh_reversed , LEN(color_teh_reversed)
+		, 7 , 0 , 6 , 5 } ,
 };
 
-const char * * colorname = color_0;
 
-unsigned int length_colorname = LEN(color_0); // LEN(color_default)
+const char * * colorname = color_teh_dark;
+
+
+unsigned int length_colorname = LEN(color_teh_dark); // LEN(color_default)
 
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int index_colorscheme = 0;
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 5;
-static unsigned int defaultrcs = 6;
 
 unsigned int altfg = 0;
 unsigned int altbg = 7;
+
+unsigned int index_colorscheme = 0;
+
 
 /*
  * Default shape of cursor
@@ -293,7 +312,17 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = +1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = +1} },
 
-	{ TERMMOD,              XK_Escape,      keyboard_select,{ 0 } },
+	{ TERMMOD,              XK_Escape,      keyboard_select, { 0 } },
+
+	{ TERMMOD,  XK_F1,          set_colorscheme,     {.i =  0} },
+	{ TERMMOD,  XK_F2,          set_colorscheme,     {.i =  1} },
+	{ TERMMOD,  XK_F3,          set_colorscheme,     {.i =  2} },
+	{ TERMMOD,  XK_F4,          set_colorscheme,     {.i =  3} },
+	{ TERMMOD,  XK_F5,          set_colorscheme,     {.i =  4} },
+	{ TERMMOD,  XK_F6,          set_colorscheme,     {.i =  5} },
+	{ TERMMOD,  XK_F7,          set_colorscheme,     {.i =  6} },
+	{ TERMMOD,  XK_F8,          set_colorscheme,     {.i =  7} },
+	{ TERMMOD,  XK_F9,          set_colorscheme,     {.i =  8} },
 };
 
 /*

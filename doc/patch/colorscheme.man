@@ -1,7 +1,8 @@
 
 .BI colorscheme
 
-Allows use of multiple colorschemes, chosen via commandline arguments.
+Allows use of multiple colorschemes, chosen via commandline arguments or
+shortcuts.
 .BI \-s " colorscheme "
 tries to match a colorscheme defined in config.h, according to rules:
 
@@ -15,3 +16,10 @@ You can also use
 .BI \-S
 to dump names of available colorschemes and exit.
 
+shortcut to change :
+.BI Ctrl+Shift+Fx
+
+.B NOTE:
+switching between colorschemes that use different index for
+background/foreground color requires clearing the screen twice. otherwise, you
+will have a mixture of colors.
