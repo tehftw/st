@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=16:antialias=true:autohint=true";
+static char *font = "Ubuntu Mono:pixelsize=18:antialias=true:autohint=true";
 static int borderpx = 4;
 
 /*
@@ -91,6 +91,75 @@ static unsigned int defaultcs = 5;
 static unsigned int defaultrcs = 6;
 
 
+static const char *color_teh_night[] = { /* strong */
+	/* 8 normal colors */
+	"#000000",  /* 0x0: black   #000000 */
+	"#ff0000",  /* 0x1: red     #cd0000 */
+	"#00ff00",  /* 0x2: green   #00cd00 */
+	"#ffff00",  /* 0x3: yellow  #cdcd00 */
+	"#0000ff",  /* 0x4: blue    #0000ee */
+	"#ff00ff",  /* 0x5: magenta #cd00cd */
+	"#00ffff",  /* 0x6: cyan    #00ffff */
+	"#ffffff",  /* 0x7: white   #e5e5e5 */
+
+	/* 8 bright colors */
+	"#606060",  /* 0x8: brblack   #808080 */
+	"#800000",  /* 0x9: brred     #ff00ff */
+	"#008000",  /* 0xa: brgreen   #00ff00 */
+	"#808000",  /* 0xb: bryellow  #ffff00 */
+	"#000080",  /* 0xc: brblue    #5c5cff */
+	"#800080",  /* 0xd: brmagenta #ff00ff */
+	"#008080",  /* 0xe: brcyan    #00ffff */
+	"#a0a0a0",  /* 0xf: brwhite   #ffffff */
+};
+
+
+static const char *color_teh_day[] = { /* strong */
+	/* 8 normal colors */
+	"#c0c0e0",  /* 0x7: white   #ffffff */
+	"#ff0000",  /* 0x1: red     #f00000 */
+	"#108010",  /* 0x2: green   #00f000 */
+	"#808010",  /* 0x3: yellow  #f0f000 */
+	"#101080",  /* 0x4: blue    #0000f0 */
+	"#801080",  /* 0x5: magenta #f000f0 */
+	"#108080",  /* 0x6: cyan    #00f0f0 */
+	"#080820",  /* 0x0: black   #202020 */
+
+	/* 8 bright colors */
+	"#909090",  /* 0xf: brwhite   #ffffff */
+	"#c02040",  /* 0x9: brred     #800000 */
+	"#20c020",  /* 0xa: brgreen   #008000 */
+	"#c0c020",  /* 0xb: bryellow  #808000 */
+	"#2020c0",  /* 0xc: brblue    #000080 */
+	"#c020c0",  /* 0xd: brmagenta #800080 */
+	"#20c0c0",  /* 0xe: brcyan    #008080 */
+	"#606060",  /* 0x8: brblack   #404040 */
+};
+
+
+static const char *color_teh_day2[] = { /* strong */
+	/* 8 normal colors */
+	"#080820",  /* 0x0: black   #202020 */
+	"#ff0000",  /* 0x1: red     #f00000 */
+	"#108010",  /* 0x2: green   #00f000 */
+	"#808010",  /* 0x3: yellow  #f0f000 */
+	"#101080",  /* 0x4: blue    #0000f0 */
+	"#801080",  /* 0x5: magenta #f000f0 */
+	"#108080",  /* 0x6: cyan    #00f0f0 */
+	"#e0e0e0",  /* 0x7: white   #ffffff */
+
+	/* 8 bright colors */
+	"#404040",  /* 0x8: brblack   #404040 */
+	"#c02040",  /* 0x9: brred     #800000 */
+	"#20c020",  /* 0xa: brgreen   #008000 */
+	"#c0c020",  /* 0xb: bryellow  #808000 */
+	"#2020c0",  /* 0xc: brblue    #000080 */
+	"#c020c0",  /* 0xd: brmagenta #800080 */
+	"#20c0c0",  /* 0xe: brcyan    #008080 */
+	"#a0a0a0",  /* 0xf: brwhite   #ffffff */
+};
+
+
 static const char *color_teh_dark[] = { /* teh-dark */
 	/* 8 normal colors */
 	"#080808",  /* 0x0: black   #000000 */
@@ -160,29 +229,6 @@ static const char *color_teh_bright[] = { /* teh-bright */
 };
 
 
-static const char *color_teh_strong[] = { /* strong */
-	/* 8 normal colors */
-	"#000000",  /* 0x0: black   #000000 */
-	"#ff0000",  /* 0x1: red     #cd0000 */
-	"#00ff00",  /* 0x2: green   #00cd00 */
-	"#ffff00",  /* 0x3: yellow  #cdcd00 */
-	"#0000ff",  /* 0x4: blue    #0000ee */
-	"#ff00ff",  /* 0x5: magenta #cd00cd */
-	"#00ffff",  /* 0x6: cyan    #00ffff */
-	"#ffffff",  /* 0x7: white   #e5e5e5 */
-
-	/* 8 bright colors */
-	"#404040",  /* 0x8: brblack   #808080 */
-	"#ff4040",  /* 0x9: brred     #ff00ff */
-	"#40ff40",  /* 0xa: brgreen   #00ff00 */
-	"#ffff40",  /* 0xb: bryellow  #ffff00 */
-	"#4040ff",  /* 0xc: brblue    #5c5cff */
-	"#ff40ff",  /* 0xd: brmagenta #ff00ff */
-	"#40ffff",  /* 0xe: brcyan    #00ffff */
-	"#c0c0c0",  /* 0xf: brwhite   #ffffff */
-};
-
-
 static const char *color_cmd[] = {
 	/* 8 normal colors */
 	"#000000",  /* 0x0: black   #000000 */
@@ -208,19 +254,21 @@ static const char *color_cmd[] = {
 
 static const Colorscheme colorschemes[] = {
 // quite likely to explode if you define anything other than 16 colors
+	{ "teh-night"     , color_teh_night , LEN(color_teh_night)
+		, 7 , 0 , 6 , 5 } ,
+	{ "teh-day" , color_teh_day , LEN(color_teh_day)
+		, 7 , 0 , 6 , 5 } ,
+	{ "teh-day2" , color_teh_day2 , LEN(color_teh_day2)
+		, 0 , 7 , 6 , 5 } ,
 	{ "dark"       , color_teh_dark , LEN(color_teh_dark)
 		, 7 , 0 , 6 , 5 } ,
 	{ "light"      , color_teh_bright , LEN(color_teh_bright)
-		, 7 , 0 , 6 , 5 } ,
-	{ "strong"     , color_teh_strong , LEN(color_teh_strong)
 		, 7 , 0 , 6 , 5 } ,
 	{ "cmd"        , color_cmd , LEN(color_cmd)
 		, 7 , 0 , 6 , 5 } ,
 	{ "dark-rev"   , color_teh_dark , LEN(color_teh_dark)
 		, 0 , 7 , 6 , 5 } ,
 	{ "light-rev"  , color_teh_bright , LEN(color_teh_bright)
-		, 0 , 7 , 6 , 5 } ,
-	{ "strong-rev" , color_teh_strong , LEN(color_teh_strong)
 		, 0 , 7 , 6 , 5 } ,
 	{ "cmd-rev"    , color_cmd , LEN(color_cmd)
 		, 0 , 7 , 6 , 5 } ,
