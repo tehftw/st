@@ -125,6 +125,7 @@ extern unsigned int defaultfg;
 extern unsigned int defaultbg;
 
 
+void externalpipe(const Arg *);
 
 void
 set_colorscheme(const Arg * arg);
