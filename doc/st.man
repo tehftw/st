@@ -130,7 +130,7 @@ even without it.
 pick colorscheme. see section: patch_colorscheme
 
 .TP
-.BI -S
+.BI \-S
 dump names of available colorschemes and exit.
 
 
@@ -152,18 +152,6 @@ Print the full screen to the
 .B Print Screen
 Print the selection to the
 .I iofile.
-.TP
-.B Ctrl-Shift-Page Up
-Increase font size.
-.TP
-.B Ctrl-Shift-Page Down
-Decrease font size.
-.TP
-.B Ctrl-Shift-Home
-Reset to default font size.
-.TP
-.B Ctrl-Shift-y
-Paste from primary selection (middle mouse button).
 .TP
 .B Ctrl-Shift-c
 Copy the selected text to the clipboard selection.
