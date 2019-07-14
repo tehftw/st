@@ -337,6 +337,18 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
+
+static char *extpipe_linkgrabber[] = { "/bin/sh", "-c",
+	"script_external-pipe-linkgrabber.sh",
+	"externalpipe", NULL };
+
+static char *extpipe_savescreen[] = {
+	"/bin/sh" ,
+	"-c" ,
+	"cat > \"$HOME/stscreen_`date -Iseconds`\"" ,
+	NULL };
+
+
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
@@ -371,6 +383,9 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,  XK_F7,          set_colorscheme,     {.i =  6} },
 	{ TERMMOD,  XK_F8,          set_colorscheme,     {.i =  7} },
 	{ TERMMOD,  XK_F9,          set_colorscheme,     {.i =  8} },
+
+	{ TERMMOD, XK_L, externalpipe, { .v = extpipe_linkgrabber } },
+	{ TERMMOD, XK_S, externalpipe, { .v = extpipe_savescreen } },
 };
 
 /*

@@ -1,0 +1,14 @@
+
+.BI external-pipe
+
+
+.BI TERMMOD + XK_L
+extpipe_linkgrabber
+
+displays all links in a dmenu, to choose one and open in browser
+
+.BI TERMMOD + XK_S
+extpipe_savescreen
+
+save screen to file: "$HOME/stscreen_`date -Iseconds`"
+
