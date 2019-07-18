@@ -87,53 +87,53 @@ unsigned int tabspaces = 8;
 
 unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
-static unsigned int defaultcs = 5;
-static unsigned int defaultrcs = 6;
+static unsigned int defaultcs = 6;
+static unsigned int defaultrcs = 5;
 
 
 static const char *color_teh_night[] = { /* strong */
 	/* 8 normal colors */
 	"#000000",  /* 0x0: black   #000000 */
-	"#ff0000",  /* 0x1: red     #cd0000 */
-	"#00ff00",  /* 0x2: green   #00cd00 */
-	"#ffff00",  /* 0x3: yellow  #cdcd00 */
-	"#0000ff",  /* 0x4: blue    #0000ee */
-	"#ff00ff",  /* 0x5: magenta #cd00cd */
-	"#00ffff",  /* 0x6: cyan    #00ffff */
-	"#ffffff",  /* 0x7: white   #e5e5e5 */
+	"#e00000",  /* 0x1: red     #cd0000 */
+	"#00e000",  /* 0x2: green   #00cd00 */
+	"#e0e000",  /* 0x3: yellow  #cdcd00 */
+	"#0000e0",  /* 0x4: blue    #0000ee */
+	"#e000e0",  /* 0x5: magenta #cd00cd */
+	"#00e0e0",  /* 0x6: cyan    #00e0e0 */
+	"#e0e0e0",  /* 0x7: white   #e5e5e5 */
 
 	/* 8 bright colors */
 	"#606060",  /* 0x8: brblack   #808080 */
-	"#800000",  /* 0x9: brred     #ff00ff */
-	"#008000",  /* 0xa: brgreen   #00ff00 */
-	"#808000",  /* 0xb: bryellow  #ffff00 */
-	"#000080",  /* 0xc: brblue    #5c5cff */
-	"#800080",  /* 0xd: brmagenta #ff00ff */
-	"#008080",  /* 0xe: brcyan    #00ffff */
+	"#c06060",  /* 0x9: brred     #ff00ff */
+	"#60c060",  /* 0xa: brgreen   #00ff00 */
+	"#c0c060",  /* 0xb: bryellow  #ffff00 */
+	"#6060c0",  /* 0xc: brblue    #5c5cff */
+	"#c060c0",  /* 0xd: brmagenta #ff00ff */
+	"#60c0c0",  /* 0xe: brcyan    #00ffff */
 	"#a0a0a0",  /* 0xf: brwhite   #ffffff */
 };
 
 
 static const char *color_teh_day[] = { /* strong */
 	/* 8 normal colors */
-	"#c0c0e0",  /* 0x7: white   #ffffff */
-	"#ff0000",  /* 0x1: red     #f00000 */
-	"#108010",  /* 0x2: green   #00f000 */
-	"#808010",  /* 0x3: yellow  #f0f000 */
-	"#101080",  /* 0x4: blue    #0000f0 */
-	"#801080",  /* 0x5: magenta #f000f0 */
-	"#108080",  /* 0x6: cyan    #00f0f0 */
-	"#080820",  /* 0x0: black   #202020 */
+	"#c0c0c0",  /* 0x7: white   #ffffff */
+	"#400000",  /* 0x1: red     #f00000 */
+	"#004000",  /* 0x2: green   #00f000 */
+	"#404000",  /* 0x3: yellow  #f0f000 */
+	"#000040",  /* 0x4: blue    #0000f0 */
+	"#400040",  /* 0x5: magenta #f000f0 */
+	"#004040",  /* 0x6: cyan    #00f0f0 */
+	"#081808",  /* 0x0: black   #202020 */
 
 	/* 8 bright colors */
-	"#909090",  /* 0xf: brwhite   #ffffff */
-	"#c02040",  /* 0x9: brred     #800000 */
-	"#20c020",  /* 0xa: brgreen   #008000 */
-	"#c0c020",  /* 0xb: bryellow  #808000 */
-	"#2020c0",  /* 0xc: brblue    #000080 */
-	"#c020c0",  /* 0xd: brmagenta #800080 */
-	"#20c0c0",  /* 0xe: brcyan    #008080 */
-	"#606060",  /* 0x8: brblack   #404040 */
+	"#808080",  /* 0xf: brwhite   #ffffff */
+	"#802020",  /* 0x9: brred     #800000 */
+	"#208020",  /* 0xa: brgreen   #008000 */
+	"#808020",  /* 0xb: bryellow  #808000 */
+	"#202080",  /* 0xc: brblue    #000080 */
+	"#802080",  /* 0xd: brmagenta #800080 */
+	"#208080",  /* 0xe: brcyan    #008080 */
+	"#404040",  /* 0x8: brblack   #404040 */
 };
 
 
@@ -252,6 +252,7 @@ static const char *color_cmd[] = {
 };
 
 
+const char * * colorname = color_teh_night; // default colorscheme
 static const Colorscheme colorschemes[] = {
 // quite likely to explode if you define anything other than 16 colors
 	{ "teh-night"     , color_teh_night , LEN(color_teh_night)
@@ -277,7 +278,6 @@ static const Colorscheme colorschemes[] = {
 };
 
 
-const char * * colorname = color_teh_dark;
 
 
 unsigned int length_colorname = LEN(color_teh_dark); // LEN(color_default)
