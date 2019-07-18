@@ -10,8 +10,6 @@ src_headers=$(wildcard src/*.h)
 scripts=$(wildcard scripts/*)
 scripts_names=$(patsubst scripts/%,%,$(scripts))
 
-echo-scripts:
-	@echo $(scripts_names)
 
 binary=out/st
 manpage=out/st.1
