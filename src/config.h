@@ -386,7 +386,7 @@ static Shortcut shortcuts[] = {
 
 	{ TERMMOD, XK_L, externalpipe, { .v = extpipe_linkgrabber } },
 	{ TERMMOD, XK_S, externalpipe, { .v = extpipe_savescreen } },
-};
+}; // shortcuts end
 
 /*
  * Special keys (change & recompile st.info accordingly)

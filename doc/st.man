@@ -134,31 +134,3 @@ pick colorscheme. see section: patch_colorscheme
 dump names of available colorschemes and exit.
 
 
-.SH SHORTCUTS
-.TP
-.B Break
-Send a break in the serial line.
-Break key is obtained in PC keyboards
-pressing at the same time control and pause.
-.TP
-.B Ctrl-Print Screen
-Toggle if st should print to the
-.I iofile.
-.TP
-.B Shift-Print Screen
-Print the full screen to the
-.I iofile.
-.TP
-.B Print Screen
-Print the selection to the
-.I iofile.
-.TP
-.B Ctrl-Shift-c
-Copy the selected text to the clipboard selection.
-.TP
-.B Ctrl-Shift-v
-Paste from the clipboard selection.
-
-
-.SH PATCHES
-

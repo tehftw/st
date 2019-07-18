@@ -47,9 +47,11 @@ $(binary): out $(SRC) $(src_headers)
 	$(CC) -o $@ $(SRC) $(STDFLAGS) $(STLDFLAGS) $(STCFLAGS)
 
 
-$(manpage): out $(mansrc) $(mansrc_patch)
+$(manpage): out $(mansrc) $(mansrc_patch) extract-shortcuts.sh src/config.h
 	sed "s/VERSION/$(VERSION)/g" doc/st.man > $(manpage)
-	cat $(mansrc_patch) doc/footer.man >> $(manpage)
+	./extract-shortcuts.sh >> $(manpage)
+	cat doc/sh-patches.man $(mansrc_patch) >> $(manpage)
+	cat doc/footer.man >> $(manpage)
 
 
 clean:
@@ -77,6 +79,7 @@ echo-install-scripts:
 
 
 install-scripts: $(scripts)
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp $(scripts) $(DESTDIR)$(PREFIX)/bin/
 	chmod 775 $(patsubst scripts/%,$(DESTDIR)$(PREFIX)/bin/%,$(scripts))
 
@@ -90,6 +93,7 @@ install-binary: $(binary)
 
 install-manpage: $(manpage)
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
+	cp -f $(manpage) $(DESTDIR)$(MANPREFIX)/man1/st.1
 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
 
 
@@ -102,4 +106,4 @@ uninstall:
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 
 
-.PHONY: all options clean dist install uninstall echo-install-scripts
+.PHONY: all options clean dist install uninstall echo-install-scripts install-manpage install-binary install-scripts
